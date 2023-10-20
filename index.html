@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&family=Caveat&family=Kavoon&family=MedievalSharp&family=Nosifer&family=Zeyada&display=swap" rel="stylesheet"></head>
+<body>
+    <div 
+    style=" background-image: url(./image/movie-9pvmdtvz4cb0xl37.jpg);;background-repeat: no-repeat;background-size: cover;margin: 0;background-attachment: fixed; width: 100%;"
+    class="">
+    <div style="background: linear-gradient(to bottom, #08c5cf, #df0753, #0da6a3);" class="w-100 sticky-top">
+      
+      <div>
+        <h1 style="font-size: xx-large;font-family: 'Nosifer', sans-serif; color: white;"><i class="fa-solid fa-video fa-beat-fade fa-2x"style="margin-left: 20px;color:black;"></i>  <span style="color: black;">Movie</span> Zone</h1>
+      </div>
+    </div>
+
+    <div class="container-fluid w-75  " style="align-items: center;margin-top: 20px;">
+      <form action=""><br>
+        <div style="font-family: 'MedievalSharp', cursive;"> <input class="form-control w-100 col-lg-4 " id="example" type="text" placeholder="Enter a movie name">
+        </div>
+        <div class="text-center" style="font-family: 'Caveat', cursive;">
+          <button onclick="movieData()" type="button" class="btn btn-danger  mt-4 ">SEARCH  <i class="fa-solid fa-magnifying-glass fa-fade" style="margin-left: 5px;"></i></button>
+        </div>
+      </form> 
+    </div>
+    <br>
+    <div class="w-75 container-fluid  col-lg-4" style=" align-items: center;color:white;"> 
+    <div id="result" class=" ">
+
+    </div>
+    </div>
+   
+    </div>
+</body> 
+<script>
+    function movieData() {
+      movieName = example.value
+      fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=fa1c9c03&t=${movieName}`).then(data => data.json()).then(cData => displayData(cData))
+    
+      function displayData(movieArray) {
+  
+        name = movieArray.Title
+        dire = movieArray.Director
+        act = movieArray.Actors
+        year = movieArray.Released
+        post = movieArray.Poster
+        rate = movieArray.Ratings[0].Value
+        plot = movieArray.Plot
+  
+        result.innerHTML = `
+       <div  class="container" style="font-family: 'Kavoon', serif;">
+      <div  class="row">
+          <!-- <div class="col-4"> -->
+              <div  class="col-lg-4 col-md-6 col-sm-12">
+              <div  class="card w-100 " style="width: 18rem;">
+                  <img src="${post}" alt="...">
+    
+                </div>
+          </div>
+          <br>
+            <div class="col-lg-4 col-md-6 col-sm-12 bg-black" style="width:600px;background-image: url(./image/istockphoto-453554783-612x612.jpg); background-size: cover;background-repeat: no-repeat; margin-left:5px;"> 
+              <div class="col-lg-4 col-md-6 col-sm-12 w-100" style="margin-top:20px;color:red; ">
+                <h4 class="" style="">Movie Name: <p style="color:pink;">${name}</h4>
+                <h4 class="" style="">Plot: <p style="color:green;">${plot}</p></h4>
+               <h4 class="" style="">Director: <p style="color:green;">${dire}</h4>
+               <h4 class="" style="">Actors: <p style="color:green;">${act}</h4>
+               <h4 class="" style="">Released: <p style="color:green;">${year}</h4>
+              <h4 class="" style="">Rate: <p style="color:green;">${rate}</h4>
+
+                    </div>
+              </div>
+            </div>
+          </div>`
+  
+  
+      }
+    }
+  </script>
+  
+</html>
